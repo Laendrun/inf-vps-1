@@ -1,0 +1,85 @@
+version: "3.2"
+
+volumes:
+  mongodata_v:
+    name: mongodata_v
+    driver: local
+    driver_opts:
+      device: /Users/laendrun/data/db/
+      type: none
+      o: bind
+  mongoconfig_v:
+    name: mongoconfig_v
+    driver: local
+    driver_opts:
+      device: /Users/laendrun/data/configdb/
+      type: none
+      o: bind
+  letsencrypt_v:
+    name: letsencrypt_v
+    driver: local
+    driver_opts:
+      device: /Users/laendrun/data/letsencrypt
+      type: none
+      o: bind
+
+networks:
+  inf-vps-1:
+    driver: bridge
+
+services:
+  api:
+    build: ./simple_api
+    image: laendrun/api_i
+    container_name: api_c
+    environment:
+      - NODE_ENV=production
+      - PORT=4002
+      - DB_URL=mongodb://mongodb:27017/mongo-test-db
+    restart: on-failure
+    networks:
+      inf-vps-1:
+          aliases:
+            - api
+    depends_on:
+      - mongodb
+  mongodb:
+    build: ./mongo
+    image: laendrun/mongo_i
+    container_name: mongo_c
+    volumes:
+      - mongodata_v:/data/db
+      - mongoconfig_v:/data/configdb
+    restart: on-failure
+    networks:
+      inf-vps-1:
+        aliases:
+            - mongodb
+  nginx:
+    build: ./nginx
+    image: laendrun/nginx_i
+    container_name: nginx_c
+    volumes:
+      - letsencrypt_v:/etc/letsencrypt
+    ports:
+      - "8080:80"
+      - "443:443"
+    restart: on-failure
+    networks:
+      inf-vps-1:
+        aliases:
+            - nginx
+    depends_on:
+      - api
+      - telegram_bot
+  telegram_bot:
+    build: ./telegram_bot
+    image: laendrun/telegram_bot_i
+    container_name: telegram_bot_c
+    restart: on-failure
+    networks:
+      inf-vps-1:
+        aliases:
+          - telegram_bot
+    depends_on:
+      - mongodb
