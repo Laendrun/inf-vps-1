@@ -77,6 +77,10 @@ services:
     image: laendrun/telegram_bot_i
     container_name: telegram_bot_c
     restart: on-failure
+    ports:
+      - "4000:4000"
+    env_file:
+      - .bot-env
     networks:
       inf-vps-1:
         aliases:
