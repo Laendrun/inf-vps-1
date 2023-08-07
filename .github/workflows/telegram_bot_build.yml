@@ -16,4 +16,4 @@ jobs:
         username: ${{ secrets.USER }}
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
-        script: bash script.sh -u ${{ github.actor }}
+        script: bash telegram_bot_build.sh
