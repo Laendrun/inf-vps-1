@@ -26,8 +26,7 @@ const handleCommand = (body, command, tokens) => {
 const handleMessage = (body, message) => {
 	if (!message.hasOwnProperty('text'))
 		return ;
-
-	if (message.entities[0].hasOwnProperty('type') && message.entities[0]['type'] == "bot_command")
+	if (message.text.charAt(0) == '/')
 	{
 		const text = message.text;
 		let tokens = text.split(' ');
