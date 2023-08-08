@@ -1,2 +1,3 @@
 TELEGRAM_BOT_TOKEN=<telegram bot token>
 DB_URL=<mongo connection string>
+BOT_ADMIN_CHATID=<chat id where bot admin/dev receives notification to>

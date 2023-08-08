@@ -20,7 +20,7 @@ const handleCommand = (body, command, tokens) => {
 	if (commands.hasOwnProperty(command))
 		commands[command](body, tokens);
 	else
-		sendText(344838741, `Unknown command: ${command}`);
+		sendText(process.env.BOT_ADMIN_CHATID, `Unknown command: ${command}`);
 }
 
 const handleMessage = (body, message) => {

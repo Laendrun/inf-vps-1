@@ -6,7 +6,7 @@ const cmd_eightball = (body, tokens) => {
 	BullshitModel.find(filter)
 	.then((items) => {
 		let item = items[Math.floor(Math.random()*items.length)];
-		let text = `${item.text}[\u200d](${item._id.toString()}.${item.user})`;
+		let text = `${item.text}`;
 		sendText(344838741, text);
 	})
 	.catch((error) => {

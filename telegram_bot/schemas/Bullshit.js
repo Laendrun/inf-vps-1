@@ -14,5 +14,4 @@ module.exports = new mongoose.Schema({
 		required: true,
 		index: true
 	},
-	id: String
 })
