@@ -12,6 +12,14 @@ const sendText = (chatId, text) => {
 	  });
 }
 
+const escape = (text) => {
+	const chars = "_*[]()~`>#+-=|{}.!";
+	for (let i = 0; i < chars.length; i++)
+		text = text.replaceAll(chars[i], `\\${chars[i]}`);
+	return (text);
+}
+
 module.exports = {
-	sendText
+	sendText,
+	escape,
 }
