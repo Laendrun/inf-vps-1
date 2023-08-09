@@ -7,11 +7,11 @@ const cmd_eightball = require('./commands/eightball.js');
 
 const handleCommand = (body, command, tokens) => {
 	command = command.substring(1);
-	console.log(command);
 
 	const commands = {
 		test: cmd_test,
-		eightball: cmd_eightball
+		eightball: cmd_eightball,
+		addphrase: require('./commands/addphrase.js')
 	}
 
 	if (command == 'start')
