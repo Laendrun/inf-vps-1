@@ -1,6 +1,8 @@
 name: Telegram Bot Build
 on:
   push:
+    branches:
+      - main
     paths:
       - telegram_bot/**
 jobs:
