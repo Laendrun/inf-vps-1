@@ -16,6 +16,7 @@ const handleReplyTo = (body) => {
 }
 
 const handleSameMsg = (body, tokens) => {
+	const username = body.message.from.username;
 	let text = '';
 	tokens.forEach((token) => {text += token + ' '; });
 	text = text.trimEnd();
