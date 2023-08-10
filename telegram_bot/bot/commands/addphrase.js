@@ -1,5 +1,5 @@
-const BullshitModel = require('../../models/Bullshit');
-const UserModel = require('../../models/User');
+const BullshitModel = require('../db/bullshit.model');
+const UserModel = require('../db/user.model');
 const { sendText, escape } = require('../helpers');
 
 const handleReplyTo = (body) => {
