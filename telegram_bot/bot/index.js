@@ -2,22 +2,17 @@ const router = require('express').Router();
 
 const { sendText } = require('./helpers.js');
 
-const cmd_test = require('./commands/test.js');
-const cmd_eightball = require('./commands/eightball.js');
-
 const handleCommand = (body, command, tokens) => {
 	command = command.substring(1);
 
 	const commands = {
-		test: cmd_test,
-		eightball: cmd_eightball,
+		eightball: require('./commands/eightball.js'),
 		addphrase: require('./commands/addphrase.js')
 	}
 
 	if (command == 'start')
 		sendText(body.message.chat.id, "Welcome bitches !");
-
-	if (commands.hasOwnProperty(command))
+	else if (commands.hasOwnProperty(command))
 		commands[command](body, tokens);
 	else
 		sendText(process.env.BOT_ADMIN_CHATID, `Unknown command: ${command}`);
@@ -38,10 +33,9 @@ const handleMessage = (body, message) => {
 }
 
 router.post('/', (req, res, next) => {
-	res.status(200);
-
 	if (req.body.hasOwnProperty('message'))
 		handleMessage(req.body, req.body.message);
+	res.status(200);
 	res.send();
 });
 

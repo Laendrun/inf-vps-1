@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-const telegram = require('./telegram/');
+const bot = require('./bot');
 
 app.use(cors());
 
@@ -13,11 +13,9 @@ app.use(express.json());
 
 app.use(logger('common'));
 
-app.use('/', telegram);
+app.use('/', bot);
 
 const port = process.env.PORT || 4000;
-
-console.log(process.env.DB_URL)
 
 mongoose.connect(process.env.DB_URL)
 .then(() => {
