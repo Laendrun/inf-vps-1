@@ -1,4 +1,4 @@
-const BullshitModel = require('../../models/Bullshit');
+const BullshitModel = require('../db/bullshit.model');
 const { sendText, escape } = require('../helpers');
 
 const cmd_eightball = (body, tokens) => {
