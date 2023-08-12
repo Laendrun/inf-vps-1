@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { sendText } = require('./helpers.js');
+const { escape, sendText } = require('./helpers.js');
 
 const handleCommand = (body, command, tokens) => {
 	command = command.substring(1);
@@ -11,7 +11,7 @@ const handleCommand = (body, command, tokens) => {
 	}
 
 	if (command == 'start')
-		sendText(body.message.chat.id, "Welcome bitches !");
+		sendText(body.message.chat.id, escape("Welcome bitches !"));
 	else if (commands.hasOwnProperty(command))
 		commands[command](body, tokens);
 	else
