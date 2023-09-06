@@ -29,7 +29,7 @@ networks:
 
 services:
   api:
-    build: ./simple_api
+    build: ./api
     image: laendrun/api_i
     container_name: api_c
     environment:
