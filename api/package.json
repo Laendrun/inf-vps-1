@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "monk": "^7.3.4"
+    "monk": "^7.3.4",
+    "swissqrbill": "^3.2.3"
   }
 }
